@@ -1,7 +1,5 @@
 package com.example.mobicomposeapp.ui.screen.login
 
-import com.example.domain.entities.Login
-
 data class LoginState(
     val email: String = "",
     val password: String = "",

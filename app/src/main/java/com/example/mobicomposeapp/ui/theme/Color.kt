@@ -2,7 +2,17 @@ package com.example.mobicomposeapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Primary = Color(0xFF6243FF)
+val Secondary = Color(0xFF0013CA)
+val TertiaryDark = Color(0xFF21BDCA)
+val TertiaryLight = Color(0xFF84DFE2)
+val TertiaryLightBlue = Color(0xFF32B4FF)
+
+val White = Color(0xFFFFFFFF)
+val Gray = Color(0xFF6D7882)
+val Black = Color(0xFFFFFFFF)
+val Error = Color(0xFFF65164)
+
+val GradientStart = Color(0xFF31B5FE)
+val GradientEnd = Color(0xFF6243FF)
+
