@@ -3,10 +3,15 @@ package com.example.mobicomposeapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mobicomposeapp.ui.router.Router
 import com.example.mobicomposeapp.ui.screen.MainModel
+import com.example.mobicomposeapp.ui.theme.MubiTheme
+import com.example.mobicomposeapp.ui.theme.Primary
+import com.example.mobicomposeapp.ui.theme.White
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,5 +25,11 @@ class MainActivity : ComponentActivity() {
 }
 @Composable
 fun MainComponent(mainModel: MainModel = viewModel()) {
-    Router(mainModel)
+    val systemUiController = rememberSystemUiController()
+    MubiTheme {
+        systemUiController.setSystemBarsColor(color = Primary)
+        Surface(color = White) {
+            Router(mainModel)
+        }
+    }
 }

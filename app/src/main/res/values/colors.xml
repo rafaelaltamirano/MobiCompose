@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary">#FF6243FF</color>
+    <color name="primary_dark">#FF6243FF</color>
     <color name="secondary">#FF0013CA</color>
     <color name="tertiary_dark">#FF21BDCA</color>
     <color name="tertiary_light">#FF84DFE2</color>

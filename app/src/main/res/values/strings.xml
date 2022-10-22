@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">MobiComposeApp</string>
+    <string name="app_name" translatable="false">MobiComposeApp</string>
+    <string name="login" >Log In</string>
+    <string name="login_description">Sing in to your account</string>
 </resources>

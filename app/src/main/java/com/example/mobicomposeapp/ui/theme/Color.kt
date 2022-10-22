@@ -12,7 +12,8 @@ val White = Color(0xFFFFFFFF)
 val Gray = Color(0xFF6D7882)
 val Black = Color(0xFFFFFFFF)
 val Error = Color(0xFFF65164)
+val GrayText = Color(0xFF6B6B83)
 
 val GradientStart = Color(0xFF31B5FE)
-val GradientEnd = Color(0xFF6243FF)
+val PrimaryDark = Color(0xFF6243FF)
 

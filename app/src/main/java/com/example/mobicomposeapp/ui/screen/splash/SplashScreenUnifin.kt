@@ -13,7 +13,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobicomposeapp.R
-import com.example.mobicomposeapp.ui.theme.GradientEnd
+import com.example.mobicomposeapp.ui.theme.PrimaryDark
 import com.example.mobicomposeapp.ui.theme.GradientStart
 
 @Composable
@@ -28,7 +28,7 @@ fun SplashScreen() {
                 brush = Brush.verticalGradient(
                     colors = listOf(
                         GradientStart,
-                        GradientEnd
+                        PrimaryDark
                     )
                 )
             ),
