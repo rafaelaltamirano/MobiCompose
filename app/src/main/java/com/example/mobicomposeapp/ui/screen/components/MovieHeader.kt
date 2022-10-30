@@ -65,7 +65,7 @@ fun MovieHeader() {
                 textAlign = TextAlign.Left
             )
             RatingBar(
-                rating = 4.3, modifierStar = Modifier
+                rating = 4.3f, modifierStar = Modifier
                     .width(22.dp)
                     .height(22.dp)
             )

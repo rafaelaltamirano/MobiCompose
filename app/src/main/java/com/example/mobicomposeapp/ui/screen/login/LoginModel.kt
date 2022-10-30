@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
+import com.example.domain.model.Login
 import com.example.domain.enums.Fields
 import com.example.domain.exceptions.FieldInvalidException
 import com.example.mobicomposeapp.ui.screen.ViewModelWithStatus
@@ -42,15 +43,13 @@ class LoginModel @Inject constructor(
         state = state.copy(passwordError = passwordError)
     }
 
-    fun setLogin(login: Boolean) {
+    fun setLogin(login: Login) {
         state = state.copy(login = login)
     }
 
 
     suspend fun submit() = viewModelScope.launch {
         setLoading(true)
-        if (state.email == "") setEmailError("Por favor, ingresa tu usuario")
-        if (state.password == "") setPasswordError("Por favor, ingresa tu contraseña")
         try {
           withContext(IO){loginCase.login()}.also(::setLogin)
         } catch (e: Exception) {

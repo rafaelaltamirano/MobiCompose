@@ -10,4 +10,5 @@ java {
 
 dependencies {
     implementation project(path: ':domain')
+    implementation 'androidx.room:room-common:2.4.3'
 }

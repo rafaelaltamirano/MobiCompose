@@ -21,7 +21,7 @@ import kotlin.math.floor
 @Composable
 fun RatingBar(
     modifierStar: Modifier = Modifier,
-    rating: Double = 0.0,
+    rating: Float = 0.0f,
     stars: Int = 5,
     starsColor: Color = TertiaryDark,
 ) {
@@ -62,29 +62,29 @@ fun RatingBar(
 @Preview
 @Composable
 fun RatingPreview() {
-    RatingBar(rating = 2.5)
+    RatingBar(rating = 2.5f)
 }
 
 @Preview
 @Composable
 fun TenStarsRatingPreview() {
-    RatingBar(stars = 10, rating = 8.5)
+    RatingBar(stars = 10, rating = 8.5f)
 }
 
 @Preview
 @Composable
 fun RatingPreviewFull() {
-    RatingBar(rating = 5.0)
+    RatingBar(rating = 5.0f)
 }
 
 @Preview
 @Composable
 fun RatingPreviewWorst() {
-    RatingBar(rating = 1.0)
+    RatingBar(rating = 1.0f)
 }
 
 @Preview
 @Composable
 fun RatingPreviewDisabled() {
-    RatingBar(rating = 0.0, starsColor = Color.Gray)
+    RatingBar(rating = 0.0f, starsColor = Color.Gray)
 }

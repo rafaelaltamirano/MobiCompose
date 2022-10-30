@@ -1,42 +1,104 @@
 package com.example.mobicomposeapp.ui.screen.components
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.mobicomposeapp.R
+import com.example.mobicomposeapp.ui.theme.Gray
+import com.example.mobicomposeapp.ui.theme.GrayDark
+import com.example.mobicomposeapp.ui.theme.Primary
 
 @Composable
-fun FilterCategory(
+fun FilterCategoryItem(
     onClick: () -> Unit,
     text: String = "",
-    modifier: Modifier = Modifier,
-    enabled:Boolean = true
+    enabled: Boolean = true
 ) {
-    Button(
-        enabled = enabled,
-        onClick = { onClick() },
-        shape = RoundedCornerShape(50),
-        modifier = modifier,
-        contentPadding = PaddingValues(
-            horizontal = dimensionResource(R.dimen.gap4),
-            vertical = dimensionResource(R.dimen.gap2),
-        )
+    Text(
+        text = text,
+        style = MaterialTheme.typography.button,
+        color = if (enabled) {
+            Color.White
+        } else {
+            GrayDark
+        },
+        modifier = Modifier
+            .clip(
+                shape = RoundedCornerShape(
+                    size = 50.dp,
+                ),
+            )
+            .clickable {
+                onClick()
+            }
+            .background(
+                if (enabled) {
+                    Primary
+                } else {
+                    Gray
+                }
+            )
+            .padding(
+                vertical = dimensionResource(R.dimen.gap3),
+                horizontal = dimensionResource(R.dimen.gap4),
+            ),
+    )
+}
+
+
+@Composable
+fun FilterCategoryList(
+    onClickItem: () -> Unit,
+    categoryList: List<String> = emptyList(),
+) {
+    var selectedOption by remember {
+        mutableStateOf("")
+    }
+    val onSelectionChange = { text: String ->
+        selectedOption = text
+    }
+    Row(
+        modifier = Modifier
+            .padding(
+                start = dimensionResource(R.dimen.gap4),
+                top = dimensionResource(R.dimen.gap5),
+                bottom = dimensionResource(R.dimen.gap5)
+            )
+            .horizontalScroll(rememberScrollState())
     ) {
-        Text(
-            text,
-            style = MaterialTheme.typography.button
-        )
+        categoryList.forEach { category ->
+            FilterCategoryItem(
+                onClick = {
+                    onSelectionChange(category)
+                    onClickItem()
+                },
+                text = category,
+                enabled = category == selectedOption
+            )
+            Spacer(modifier = Modifier.width(dimensionResource(R.dimen.gap2)))
+
+        }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun FilterCategoryPreview() {
-    FilterCategory(onClick = {}, "Top Rated")
+    FilterCategoryItem(onClick = {}, "Top Rated")
 }

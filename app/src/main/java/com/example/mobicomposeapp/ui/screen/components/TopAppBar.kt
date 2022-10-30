@@ -31,7 +31,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun TopAppBar(
     navController: NavController,
-    drawerState: DrawerState,
     onClick: (() -> Unit)? = null,
 ) {
 
@@ -80,5 +79,5 @@ fun TopAppBar(
 @Preview
 @Composable
 fun PreviewTopBar() {
-    TopAppBar(rememberNavController(), rememberDrawerState(DrawerValue.Open))
+    TopAppBar(rememberNavController())
 }

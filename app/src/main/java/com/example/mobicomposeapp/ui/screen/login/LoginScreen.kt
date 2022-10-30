@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mobicomposeapp.R
 import com.example.mobicomposeapp.ui.screen.MainModel
 import com.example.mobicomposeapp.ui.screen.components.SubmitButton
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -35,13 +36,12 @@ fun LoginScreen(
     model: LoginModel,
     navController: NavController
 ) {
-    val state = model.state
-    val localFocusManager = LocalFocusManager.current
     val configuration = LocalConfiguration.current
     val coroutineScope = rememberCoroutineScope()
 
-//    model.state.login?.also(mainModel::setLogin)
-
+    model.state.login?.let {
+        mainModel.setLogin(it)
+    }
     Box(
         Modifier
             .fillMaxSize()
@@ -70,7 +70,7 @@ fun LoginScreen(
             )
             Spacer(Modifier.height(dimensionResource(R.dimen.gap4)))
             SubmitButton(stringResource(R.string.login),
-                onClick = { })
+                onClick = { coroutineScope.launch { model.submit() } })
         }
 
     }
