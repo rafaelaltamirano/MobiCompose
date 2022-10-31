@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -34,7 +33,8 @@ fun HomeScreen(model: HomeModel, navController: NavHostController) {
         TopAppBar(navController = navController, onClick = {})
         FilterCategoryList(
             categoryList = model.state.category,
-            onClickItem = {}
+            onClickItem = {
+                model.requestTvShows(it)}
         )
 
         if (model.state.tvShows.isEmpty()) {
@@ -53,15 +53,16 @@ fun HomeScreen(model: HomeModel, navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = dimensionResource(R.dimen.gap4)),
-                 content = { items(model.state.tvShows) {
-                         FilmCard(
-                             image = LARGE_IMAGE_URL + it.poster,
-                             title = it.name,
-                             rating = it.rating
-                         )
+                content = {
+                    items(model.state.tvShows) {
+                        FilmCard(
+                            image = LARGE_IMAGE_URL + it.poster,
+                            title = it.name,
+                            rating = it.rating
+                        )
 
-                     }
-                 }
+                    }
+                }
             )
         }
     }

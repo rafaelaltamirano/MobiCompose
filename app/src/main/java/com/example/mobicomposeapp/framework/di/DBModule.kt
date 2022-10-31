@@ -23,6 +23,7 @@ object DBModule {
             appContext,
             MubiDatabase::class.java,
             "mubi_database"
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 }

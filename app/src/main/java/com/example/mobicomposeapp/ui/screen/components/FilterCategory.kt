@@ -19,6 +19,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mobicomposeapp.R
+import com.example.mobicomposeapp.ui.screen.home.TvShowTypes
 import com.example.mobicomposeapp.ui.theme.Gray
 import com.example.mobicomposeapp.ui.theme.GrayDark
 import com.example.mobicomposeapp.ui.theme.Primary
@@ -63,11 +64,11 @@ fun FilterCategoryItem(
 
 @Composable
 fun FilterCategoryList(
-    onClickItem: () -> Unit,
-    categoryList: List<String> = emptyList(),
+    onClickItem: (String) -> Unit,
+    categoryList: Map<TvShowTypes, String> = emptyMap(),
 ) {
     var selectedOption by remember {
-        mutableStateOf("")
+        mutableStateOf(categoryList.firstNotNullOf {(category,url)  -> category.type })
     }
     val onSelectionChange = { text: String ->
         selectedOption = text
@@ -81,14 +82,14 @@ fun FilterCategoryList(
             )
             .horizontalScroll(rememberScrollState())
     ) {
-        categoryList.forEach { category ->
+        categoryList.forEach { (category,url) ->
             FilterCategoryItem(
                 onClick = {
-                    onSelectionChange(category)
-                    onClickItem()
+                    onSelectionChange(category.type)
+                    onClickItem(url)
                 },
-                text = category,
-                enabled = category == selectedOption
+                text = category.type,
+                enabled = category.type == selectedOption
             )
             Spacer(modifier = Modifier.width(dimensionResource(R.dimen.gap2)))
 

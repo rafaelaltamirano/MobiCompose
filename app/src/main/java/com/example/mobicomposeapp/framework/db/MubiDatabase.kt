@@ -7,7 +7,8 @@ import com.example.data.datasource.entities.TvShowEntity
 
 @Database(
     entities = [TvShowEntity::class],
-    version = 1)
+    version = 2,
+    exportSchema = false)
 
 abstract class MubiDatabase : RoomDatabase() {
     abstract fun tvShowDao(): TvShowDao

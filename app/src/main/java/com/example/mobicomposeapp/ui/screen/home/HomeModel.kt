@@ -19,7 +19,7 @@ private val homeCase: HomeCase
 ) : ViewModelWithStatus() {
 
     init {
-        requestTvShows()
+        requestTvShows("top_rated")
     }
 
     var state by mutableStateOf(HomeState())
@@ -29,11 +29,11 @@ private val homeCase: HomeCase
         state = state.copy(tvShows = tvShows)
     }
 
-    private fun requestTvShows() = viewModelScope.launch {
+     fun requestTvShows(url:String) = viewModelScope.launch {
 //        setLoadingMovements(true)
         try {
             withContext(Dispatchers.IO) {
-                homeCase.requestTvShow()
+                homeCase.requestTvShow(url)
             }.also(::setTvShows)
         } catch (e: Exception) {
             handleNetworkError(e)

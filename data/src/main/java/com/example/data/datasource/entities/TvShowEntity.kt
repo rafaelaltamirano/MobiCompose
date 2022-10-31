@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class TvShowEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val poster: String,
+    val poster: String? = null,
     val name: String,
     val rating: Float, // vote overage /2
 )

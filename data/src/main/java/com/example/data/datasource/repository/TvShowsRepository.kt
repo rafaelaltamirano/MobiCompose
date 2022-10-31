@@ -11,7 +11,7 @@ class TvShowsRepository(
     var tvShow: List<TvShow> = emptyList()
         private set
 
-    suspend fun requestTvShows() = remote.requestTvShows().also {
+    suspend fun requestTvShows(url:String) = remote.requestTvShows(url).also {
         save(it)
     }
     override suspend fun save(t: List<TvShow>) {
@@ -29,7 +29,7 @@ class TvShowsRepository(
 
 interface TvShowsRemoteSource {
 
-    suspend fun requestTvShows(): List<TvShow>
+    suspend fun requestTvShows(url:String): List<TvShow>
 
 }
 

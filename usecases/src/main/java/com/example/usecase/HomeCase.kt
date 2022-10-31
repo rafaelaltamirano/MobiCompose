@@ -6,9 +6,9 @@ import java.lang.Exception
 
 class HomeCase(private val tvShowRepo : TvShowsRepository) {
 
-    suspend fun requestTvShow(): List<TvShow> {
+    suspend fun requestTvShow(url:String): List<TvShow> {
         return try {
-            tvShowRepo.requestTvShows()
+            tvShowRepo.requestTvShows(url)
         } catch (e: Exception) {
                 throw Exception()
         }
