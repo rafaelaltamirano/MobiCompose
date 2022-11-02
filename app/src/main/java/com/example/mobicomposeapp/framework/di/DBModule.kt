@@ -2,6 +2,8 @@ package com.example.mobicomposeapp.framework.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.data.dao.TvShowDao
+import com.example.data.dao.TvShowRemoteKeysDao
 import com.example.mobicomposeapp.framework.db.MubiDatabase
 import dagger.Module
 import dagger.Provides
@@ -26,4 +28,13 @@ object DBModule {
         ).fallbackToDestructiveMigration()
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideTvShowDao(mubiDb: MubiDatabase): TvShowDao = mubiDb.tvShowDao()
+
+    @Singleton
+    @Provides
+    fun provideTvShowRemoteKeysDao(mubiDb: MubiDatabase): TvShowRemoteKeysDao = mubiDb.tvShowRemoteKeysDao()
+
 }

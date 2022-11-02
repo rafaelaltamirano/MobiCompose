@@ -3,6 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="MobiComposeApp.app" target="11" />
+      <module name="MobiComposeApp.data" target="11" />
+      <module name="MobiComposeApp.usecases" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

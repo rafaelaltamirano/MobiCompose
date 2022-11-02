@@ -4,11 +4,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.Login
 import com.example.domain.enums.Fields
 import com.example.domain.exceptions.FieldInvalidException
+import com.example.domain.model.Login
 import com.example.mobicomposeapp.ui.screen.ViewModelWithStatus
-import com.example.usecase.LoginCase
+import com.example.usecases.LoginCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch

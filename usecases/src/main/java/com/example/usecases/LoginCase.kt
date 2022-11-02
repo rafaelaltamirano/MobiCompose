@@ -1,4 +1,4 @@
-package com.example.usecase
+package com.example.usecases
 
 import com.example.domain.model.Login
 

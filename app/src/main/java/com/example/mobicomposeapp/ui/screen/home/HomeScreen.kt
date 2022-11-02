@@ -24,27 +24,33 @@ import com.example.mobicomposeapp.R
 import com.example.mobicomposeapp.ui.screen.components.FilmCard
 import com.example.mobicomposeapp.ui.screen.components.FilterCategoryList
 import com.example.mobicomposeapp.ui.screen.components.TopAppBar
+import androidx.paging.compose.collectAsLazyPagingItems
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(model: HomeModel, navController: NavHostController) {
+
+    val allTvShows = model.requestTvShows.collectAsLazyPagingItems()
+
+
     Column() {
         TopAppBar(navController = navController, onClick = {})
         FilterCategoryList(
             categoryList = model.state.category,
             onClickItem = {
-                model.requestTvShows(it)}
+//                model.requestTvShows(it)
+                }
         )
 
-        if (model.state.tvShows.isEmpty()) {
-            Text(
-                color = Color.LightGray,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.caption,
-                text = "nada che"
-            )
-        } else {
+//        if (model.state.tvShows.isEmpty()) {
+//            Text(
+//                color = Color.LightGray,
+//                textAlign = TextAlign.Center,
+//                style = MaterialTheme.typography.caption,
+//                text = "nada che"
+//            )
+//        } else {
 
             LazyVerticalGrid(
                 cells = GridCells.Fixed(2),
@@ -54,17 +60,18 @@ fun HomeScreen(model: HomeModel, navController: NavHostController) {
                     .fillMaxSize()
                     .padding(horizontal = dimensionResource(R.dimen.gap4)),
                 content = {
-                    items(model.state.tvShows) {
-                        FilmCard(
-                            image = LARGE_IMAGE_URL + it.poster,
-                            title = it.name,
-                            rating = it.rating
-                        )
-
+                    items(allTvShows.itemSnapshotList) {
+                        if (it != null) {
+                            FilmCard(
+                                image = LARGE_IMAGE_URL + it.poster,
+                                title = it.name,
+                                rating = it.rating
+                            )
+                        }
                     }
                 }
             )
-        }
+//        }
     }
 }
 

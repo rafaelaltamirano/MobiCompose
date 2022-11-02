@@ -1,10 +1,10 @@
 package com.example.mobicomposeapp.framework.di
 
-import com.example.data.datasource.repository.TvShowsRepository
-import com.example.domain.model.TvShow
-import com.example.usecase.HomeCase
-import com.example.usecase.LoginCase
-import com.example.usecase.MainCase
+import com.example.domain.repostiory.TvShowsRepository
+import com.example.usecases.HomeCase
+import com.example.usecases.LoginCase
+import com.example.usecases.MainCase
+import com.example.usecases.TvShowUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,15 +27,21 @@ object UseCaseModule {
     fun providerLoginCase(
     ): LoginCase {
         return LoginCase(
-
         )
     }
 
+//    @Singleton
+//    @Provides
+//    fun providerHomeCase(
+//        tvShowRepo: TvShowsRepository
+//    ) = HomeCase(tvShowRepo)
+
+
     @Singleton
     @Provides
-    fun providerHomeCase(
-        tvShowRepo : TvShowsRepository
-    ): HomeCase {
-        return HomeCase(tvShowRepo)
-    }
+    fun provideTvShowUseCases(
+        tvShowRepo: TvShowsRepository
+    ) = TvShowUseCases(getTvShows = HomeCase(tvShowRepo))
+
+
 }
