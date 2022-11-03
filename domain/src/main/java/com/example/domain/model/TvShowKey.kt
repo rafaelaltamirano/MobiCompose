@@ -3,11 +3,11 @@ package com.example.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tv_show_remote_keys")
-data class TvShowRemoteKeys(
+@Entity(tableName = "tv_show_keys")
+data class TvShowKey(
     @PrimaryKey(autoGenerate = false)
-    val id: Int,
+    val id: Long? = null,
     val prevPage: Int?,
     val nextPage: Int?,
-    val lastUpdated: Long?,
+//    val lastUpdated: Long?,
 )

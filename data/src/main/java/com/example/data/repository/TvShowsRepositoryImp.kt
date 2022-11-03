@@ -1,17 +1,33 @@
 package com.example.data.repository
 
-import com.example.data.tvShows.TvShowsLocalSource
-import com.example.data.tvShows.TvShowsRemoteSource
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.example.data.datasource.tvShows.TvShowsLocalSource
+import com.example.data.datasource.tvShows.TvShowsRemoteSource
+import com.example.data.paging.TvShowMediator
 import com.example.domain.model.TvShow
-import com.example.domain.repostiory.TvShowsRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class TvShowsRepositoryImp(
-    private val remote: TvShowsRemoteSource,
-    private val local: TvShowsLocalSource
-) : TvShowsRepository {
-    override fun getTvShows() = remote.requestTvShows()
+class TvShowsRepository  @Inject constructor (
+    private val tvShowsRemoteSource: TvShowsRemoteSource,
+    private val tvShowsLocalSource: TvShowsLocalSource,
+) {
+    private val tbShowDao = tvShowsLocalSource.getTvShowDao()
 
-    override fun getTvShowsFromDB(tvShowId: Int): Flow<TvShow> = local.getTvShowsFromDB(tvShowId)
+    @OptIn(ExperimentalPagingApi::class)
+    fun requestTvShows(): Flow<PagingData<TvShow>> {
+        val pagingSourceFactory = { tbShowDao.getAllTvShows() }
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            remoteMediator = TvShowMediator(
+                tvShowsRemoteSource,
+                tvShowsLocalSource
+            ),
+            pagingSourceFactory = pagingSourceFactory,
+        ).flow
+    }
 }
 

@@ -3,8 +3,8 @@ package com.example.mobicomposeapp.framework.di
 import android.content.Context
 import androidx.room.Room
 import com.example.data.dao.TvShowDao
-import com.example.data.dao.TvShowRemoteKeysDao
-import com.example.mobicomposeapp.framework.db.MubiDatabase
+import com.example.data.dao.TvShowKeyDao
+import com.example.data.room.MubiDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,6 +35,6 @@ object DBModule {
 
     @Singleton
     @Provides
-    fun provideTvShowRemoteKeysDao(mubiDb: MubiDatabase): TvShowRemoteKeysDao = mubiDb.tvShowRemoteKeysDao()
+    fun provideTvShowKeysDao(mubiDb: MubiDatabase): TvShowKeyDao = mubiDb.tvShowKeysDao()
 
 }

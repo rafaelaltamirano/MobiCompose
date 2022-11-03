@@ -1,10 +1,9 @@
 package com.example.mobicomposeapp.framework.di
 
 
-import com.example.data.tvShows.TvShowsLocalSource
-import com.example.data.tvShows.TvShowsRemoteSource
-import com.example.data.repository.TvShowsRepositoryImp
-import com.example.domain.repostiory.TvShowsRepository
+import com.example.data.datasource.tvShows.TvShowsLocalSource
+import com.example.data.datasource.tvShows.TvShowsRemoteSource
+import com.example.data.repository.TvShowsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +20,6 @@ object RepositoryModule {
         remote: TvShowsRemoteSource,
         local: TvShowsLocalSource
     ): TvShowsRepository {
-        return TvShowsRepositoryImp(remote, local)
+        return TvShowsRepository(remote, local)
     }
 }

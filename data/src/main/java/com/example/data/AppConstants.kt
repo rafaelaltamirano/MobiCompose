@@ -1,4 +1,4 @@
-package com.example.mobicomposeapp
+package com.example.data
 
 
 // OBJECT funciona como un sigleton,cada vez que usemos appConstants accedera desde un mismo objeto, es decir lo crea solo una vez

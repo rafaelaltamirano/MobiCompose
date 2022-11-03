@@ -1,4 +1,4 @@
-package com.example.mobicomposeapp.framework.api.schemas.response
+package com.example.data.dto
 
 
 data class ResponseWrapper<T>(

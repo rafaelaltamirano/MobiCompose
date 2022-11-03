@@ -1,9 +1,9 @@
 package com.example.mobicomposeapp.framework.di
 
-import com.example.data.tvShows.TvShowsLocalSource
-import com.example.data.tvShows.TvShowsRemoteSource
-import com.example.mobicomposeapp.framework.datasourceImp.tvShows.TvShowsLocalSourceImp
-import com.example.mobicomposeapp.framework.datasourceImp.tvShows.TvShowsRemoteSourceImp
+import com.example.data.datasource.tvShows.TvShowsLocalSource
+import com.example.data.datasource.tvShows.TvShowsRemoteSource
+import com.example.data.datasource.tvShows.imp.TvShowsLocalSourceImp
+import com.example.data.datasource.tvShows.imp.TvShowsRemoteSourceImp
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

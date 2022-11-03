@@ -1,6 +1,6 @@
 package com.example.mobicomposeapp.framework.di
 
-import com.example.mobicomposeapp.framework.api.TvShowApi
+import com.example.data.api.TvShowApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

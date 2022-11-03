@@ -3,30 +3,44 @@ package com.example.mobicomposeapp.ui.screen.home
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.example.domain.model.TvShow
 import com.example.mobicomposeapp.ui.screen.ViewModelWithStatus
 import com.example.usecases.HomeCase
-import com.example.usecases.TvShowUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeModel @Inject constructor(
-    tvShowUseCases: TvShowUseCases
+    private val homeCase: HomeCase
 ) : ViewModelWithStatus() {
 
     init {
-//        requestTvShows("top_rated")
+        requestTvShows()
     }
 
     var state by mutableStateOf(HomeState())
         private set
 
-    private fun setTvShows(tvShows: List<TvShow>) {
+    private fun setTvShows(tvShows: Flow<PagingData<TvShow>>) {
         state = state.copy(tvShows = tvShows)
     }
 
-    val requestTvShows = tvShowUseCases.getTvShows()
+    fun requestTvShows() = viewModelScope.launch {
+        try {
+         withContext(IO) {homeCase.requestTvShow()}  .also { setTvShows(it) }
+        } catch (e: Exception) {
+            handleNetworkError(e)
+        } finally {
+        }
+    }
+
+
 
 //     fun requestTvShows() = viewModelScope.launch {
 ////        setLoadingMovements(true)
@@ -38,7 +52,6 @@ class HomeModel @Inject constructor(
 ////            setLoadingMovements(false)
 //        }
 //    }
-
 
 
 }

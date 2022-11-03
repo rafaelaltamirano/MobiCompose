@@ -1,7 +1,10 @@
 package com.example.mobicomposeapp.ui.screen.home
 
+import androidx.paging.PagingData
 import com.example.domain.model.TvShow
 import com.example.mobicomposeapp.ui.screen.home.TvShowTypes.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 enum class TvShowTypes(val type: String) {
     TOP_RATED("Top Rated"),
@@ -17,7 +20,7 @@ data class HomeState(
         AIRING_TODAY to "airing_today"
     ),
 //    val category: List<TvShowTypes> = listOf(TOP_RATED, POPULAR, ON_TV,AIRING_TODAY),
-    val tvShows: List<TvShow> = emptyList()
+    val tvShows: Flow<PagingData<TvShow>> = emptyFlow()
 
 
 )

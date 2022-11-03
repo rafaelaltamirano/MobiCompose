@@ -27,14 +27,6 @@ class LoginModel @Inject constructor(
         state = state.copy(loading = loading)
     }
 
-    fun setEmail(email: String) {
-        state = state.copy(email = email)
-    }
-
-    fun setPassword(password: String) {
-        state = state.copy(password = password)
-    }
-
     fun setEmailError(emailError: String = "") {
         state = state.copy(emailError = emailError)
     }
