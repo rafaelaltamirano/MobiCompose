@@ -47,21 +47,4 @@ class HomeModel @Inject constructor(
             setLoading(false)
         }
     }
-
-
-
-
-
-//     fun requestTvShows() = viewModelScope.launch {
-////        setLoadingMovements(true)
-//        try {
-//                homeCase.requestTvShow()
-//        } catch (e: Exception) {
-//            handleNetworkError(e)
-//        } finally {
-////            setLoadingMovements(false)
-//        }
-//    }
-
-
 }

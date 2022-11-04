@@ -1,13 +1,10 @@
 package com.example.data.dao
 
-
-
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-
 import com.example.domain.model.TvShow
 import kotlinx.coroutines.flow.Flow
 
@@ -23,6 +20,6 @@ interface TvShowDao {
     @Query("SELECT * FROM tv_show")
      fun getAllTvShows(): PagingSource<Int, TvShow>
 
-//    @Query("SELECT * FROM TvShow WHERE tvShowId = :tvShowId")
-//    fun getTvShow(tvShowId: Int): Flow<TvShow>
+    @Query("SELECT * FROM tv_show WHERE id = :tvShowId")
+    fun getTvShow(tvShowId: Int): Flow<TvShow>
 }

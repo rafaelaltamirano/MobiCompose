@@ -34,7 +34,8 @@ fun RatingBar(
         repeat(filledStars) {
             Icon(painter = painterResource(R.drawable.ic_star_fill),
                 modifier = modifierStar.padding(dimensionResource(R.dimen.gap2)),
-                contentDescription = null, tint = starsColor)
+                contentDescription = null,
+                tint = starsColor)
         }
 
         if (halfStar) {
