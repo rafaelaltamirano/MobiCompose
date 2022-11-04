@@ -4,5 +4,5 @@ import com.example.data.Resource
 import com.example.domain.model.TvShow
 
 interface TvShowsRemoteSource {
-suspend fun requestTvShows(page: Int): Resource<List<TvShow>>
+suspend fun requestTvShows(page: Int,url :String): Resource<List<TvShow>>
 }

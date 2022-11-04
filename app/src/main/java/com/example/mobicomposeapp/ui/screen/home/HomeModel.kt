@@ -23,7 +23,7 @@ class HomeModel @Inject constructor(
         private set
 
     init {
-        requestTvShows()
+        requestTvShows(TvShowTypes.TOP_RATED.url)
         setMediator(true)
     }
 
@@ -33,14 +33,14 @@ class HomeModel @Inject constructor(
     private fun setLoading(loading: Boolean) {
         state = state.copy(loading = loading)
     }
-    private fun setMediator(mediator: Boolean) {
+     fun setMediator(mediator: Boolean) {
         state = state.copy(mediator = mediator)
     }
 
-    fun requestTvShows() = viewModelScope.launch {
+    fun requestTvShows(url: String) = viewModelScope.launch {
         try {
             setLoading(true)
-         withContext(IO) {homeCase.requestTvShow()}.also { setTvShows(it)}
+         withContext(IO) {homeCase.requestTvShow(url)}.also { setTvShows(it)}
         } catch (e: Exception) {
             handleNetworkError(e)
         } finally {

@@ -23,6 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.mobicomposeapp.R
 import com.example.mobicomposeapp.ui.screen.components.FilmCard
@@ -43,29 +44,23 @@ fun HomeScreen(model: HomeModel, navController: NavHostController) {
     val allTvShows = model.state.tvShows.collectAsLazyPagingItems()
     val state = model.state
 
-    val ress = allTvShows.loadState.append
-
-
-
-
     Column() {
         TopAppBar(navController = navController, onClick = {})
         FilterCategoryList(
             categoryList = model.state.category,
             onClickItem = {
-//                model.requestTvShows(it)
+                allTvShows.refresh()
+                model.setMediator(true)
+                model.requestTvShows(it)
             }
         )
-
-        val refreshState = if(state.mediator){
+        //avoid blinking in initial load
+        val refreshState = if (state.mediator) {
             allTvShows.loadState.mediator?.refresh
-        }
-        else {
+        } else {
             allTvShows.loadState.source.refresh
         }
-
-
-        if (refreshState is LoadState.Loading && allTvShows.itemSnapshotList.isEmpty()) {
+        if (refreshState is LoadState.Loading) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -79,10 +74,24 @@ fun HomeScreen(model: HomeModel, navController: NavHostController) {
                         .fillMaxSize(),
                 )
             }
+        } else if (refreshState is LoadState.Error) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 20.dp, end = 20.dp, top = 60.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    color = Color.LightGray,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.caption,
+                    text = "Error Loading"
+                )
+            }
         } else {
             SwipeRefresh(
                 state = rememberSwipeRefreshState(state.loading),
-                onRefresh = model::requestTvShows,
+                onRefresh = { allTvShows.refresh() },
                 indicator = { state, trigger ->
                     SwipeRefreshIndicator(
                         state = state,

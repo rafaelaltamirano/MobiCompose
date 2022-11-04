@@ -68,7 +68,7 @@ fun FilterCategoryList(
     categoryList: Map<TvShowTypes, String> = emptyMap(),
 ) {
     var selectedOption by remember {
-        mutableStateOf(categoryList.firstNotNullOf {(category,url)  -> category.type })
+        mutableStateOf(categoryList.firstNotNullOf {(url,category)  -> url.url })
     }
     val onSelectionChange = { text: String ->
         selectedOption = text
@@ -82,14 +82,14 @@ fun FilterCategoryList(
             )
             .horizontalScroll(rememberScrollState())
     ) {
-        categoryList.forEach { (category,url) ->
+        categoryList.forEach { (url,category) ->
             FilterCategoryItem(
                 onClick = {
-                    onSelectionChange(category.type)
-                    onClickItem(url)
+                    onSelectionChange(url.url)
+                    onClickItem(url.url)
                 },
-                text = category.type,
-                enabled = category.type == selectedOption
+                text = category,
+                enabled = url.url == selectedOption
             )
             Spacer(modifier = Modifier.width(dimensionResource(R.dimen.gap2)))
 

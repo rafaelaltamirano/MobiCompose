@@ -13,9 +13,9 @@ class TvShowsRemoteSourceImp  @Inject constructor(
     private val api: TvShowApi
 ) : TvShowsRemoteSource {
 
-    override suspend fun requestTvShows(page: Int): Resource<List<TvShow>> {
+    override suspend fun requestTvShows(page: Int,url:String): Resource<List<TvShow>> {
         return try {
-            val res = api.getTvShowsByUrl(api_key = API_KEY, page = page)
+            val res = api.getTvShowsByUrl(api_key = API_KEY, page = page,url = "tv/$url")
             if (res.isSuccessful) {
                 val body = res.body()?.results?.map { it.toEntity() }
                 Resource.Success(body)

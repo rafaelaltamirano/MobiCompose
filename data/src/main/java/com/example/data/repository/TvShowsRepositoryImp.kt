@@ -18,13 +18,14 @@ class TvShowsRepository  @Inject constructor (
     private val tbShowDao = tvShowsLocalSource.getTvShowDao()
 
     @OptIn(ExperimentalPagingApi::class)
-     fun requestTvShows(): Flow<PagingData<TvShow>> {
+     fun requestTvShows(url : String): Flow<PagingData<TvShow>> {
         val pagingSourceFactory = { tbShowDao.getAllTvShows() }
         return Pager(
             config = PagingConfig(pageSize = 10),
             remoteMediator = TvShowMediator(
                 tvShowsRemoteSource,
-                tvShowsLocalSource
+                tvShowsLocalSource,
+                url
             ),
             pagingSourceFactory = pagingSourceFactory,
         ).flow

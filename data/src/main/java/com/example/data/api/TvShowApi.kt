@@ -10,8 +10,10 @@ import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface TvShowApi {
-    @GET("tv/popular")
+//    @GET("tv/top_rated")
+    @GET
     suspend fun getTvShowsByUrl(
+        @Url url: String,
         @Query("api_key") api_key: String,
         @Query("page") page: Int = 1,
     ): Response<ResponseWrapper<List<TvShowDto>>>

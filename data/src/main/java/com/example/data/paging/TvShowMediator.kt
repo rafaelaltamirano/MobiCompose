@@ -16,7 +16,8 @@ import javax.inject.Inject
 class TvShowMediator @Inject constructor(
     private val tvShowsRemoteSource: TvShowsRemoteSource,
     private val tvShowsLocalSource: TvShowsLocalSource,
-    private val initialPage: Int = 1,
+    private val url: String,
+    private val initialPage: Int = 1
 ) : RemoteMediator<Int, TvShow>() {
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, TvShow>): MediatorResult {
@@ -38,7 +39,7 @@ class TvShowMediator @Inject constructor(
                 }
             }
 
-            val response = tvShowsRemoteSource.requestTvShows(page = page)
+            val response = tvShowsRemoteSource.requestTvShows(page = page,url = url)
             val endOfPagination = response.data?.size!! < state.config.pageSize
 
             when (response) {
