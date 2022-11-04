@@ -12,6 +12,7 @@ enum class TvShowTypes(val type: String) {
     ON_TV("On Tv"),
     AIRING_TODAY("Airing Today")
 }
+
 data class HomeState(
     val category: Map<TvShowTypes, String> = mapOf(
         TOP_RATED to "top_rated",
@@ -20,7 +21,9 @@ data class HomeState(
         AIRING_TODAY to "airing_today"
     ),
 //    val category: List<TvShowTypes> = listOf(TOP_RATED, POPULAR, ON_TV,AIRING_TODAY),
-    val tvShows: Flow<PagingData<TvShow>> = emptyFlow()
+    val tvShows: Flow<PagingData<TvShow>> = emptyFlow(),
+    val loading: Boolean = false,
+    val mediator: Boolean = false,
 
 
-)
+    )

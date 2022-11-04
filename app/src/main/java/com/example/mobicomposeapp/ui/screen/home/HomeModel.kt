@@ -19,26 +19,36 @@ import javax.inject.Inject
 class HomeModel @Inject constructor(
     private val homeCase: HomeCase
 ) : ViewModelWithStatus() {
+    var state by mutableStateOf(HomeState())
+        private set
 
     init {
         requestTvShows()
+        setMediator(true)
     }
-
-    var state by mutableStateOf(HomeState())
-        private set
 
     private fun setTvShows(tvShows: Flow<PagingData<TvShow>>) {
         state = state.copy(tvShows = tvShows)
     }
+    private fun setLoading(loading: Boolean) {
+        state = state.copy(loading = loading)
+    }
+    private fun setMediator(mediator: Boolean) {
+        state = state.copy(mediator = mediator)
+    }
 
     fun requestTvShows() = viewModelScope.launch {
         try {
-         withContext(IO) {homeCase.requestTvShow()}  .also { setTvShows(it) }
+            setLoading(true)
+         withContext(IO) {homeCase.requestTvShow()}.also { setTvShows(it)}
         } catch (e: Exception) {
             handleNetworkError(e)
         } finally {
+            setLoading(false)
         }
     }
+
+
 
 
 
